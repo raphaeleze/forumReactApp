@@ -11,14 +11,10 @@ import Router from './Router';
 
 function App() {
   return (
-
-
     <div className="App">
-<ButtonAppBar></ButtonAppBar>
-
-<Router></Router>
-
-</div>
+      <ButtonAppBar></ButtonAppBar>
+      <Router></Router>
+    </div>
   );
 }
 
