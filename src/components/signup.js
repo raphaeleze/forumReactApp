@@ -19,21 +19,71 @@ export default function Signup() {
 
   const navigate = useNavigate();
 
-  // const [userName, setUserName] = useState(null);
-  // const [email, setEmail] = useState(null);
-  // const [password, setPassword] = useState(null);
-  // const [confirmPassword, setConfirmPassword] = useState(null);
-
   function navBack() {
     navigate(process.env.PUBLIC_URL + "/")
   }
 
+  /**
+   * Calls the API from creating the user
+   */
   function createUser() {
     //process.env.REACT_APP_API_URL
+    if (validInputs()) {
+      const userData = { "email": values.email, "username": values.userName, "password": values.password };
+
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(userData)
+      };
+
+      fetch(`${process.env.REACT_APP_API_URL}/users/add`, requestOptions)
+        .then(response => response.json())
+        .then(data => function(data){
+          debugger;
+          console.log("Succeed")
+        });
+
+
+    } else {
+      console.log("Check your inputs!")
+    }
+
   }
 
+  /**
+   * Verifies if the user inputs are valid
+   */
+  function validInputs(){
+    let veredict = true;
+
+    if(!values.email){
+      veredict = false;
+    }
+
+    if(!values.userName){
+      veredict = false;
+    }
+
+    if(!values.password){
+      veredict = false;
+    }
+
+    if(!values.confirmPassword){
+      veredict = false;
+    }
+
+    if(values.password !== values.confirmPassword){
+      veredict = false;
+    }
+
+    return veredict;
+  }
+
+  /**
+   * Sets all the fields of the form to blank
+   */
   function clearForm() {
-    //process.env.REACT_APP_API_URL
     setValues({
       userName: '',
       email: '',
@@ -50,7 +100,7 @@ export default function Signup() {
   *************************************
   */
 
-  const [values, setValues] = React.useState({
+  const [values, setValues] = useState({
     userName: '',
     email: '',
     password: '',
@@ -91,7 +141,7 @@ export default function Signup() {
 
         <div>
           <h4>Registration form</h4>
-          <TextField label="Userame" variant="outlined" fullWidth className='mar-5' value={values.userName} onChange={handleChange('userName')} />
+          <TextField label="Username" variant="outlined" fullWidth className='mar-5' value={values.userName} onChange={handleChange('userName')} />
           <TextField label="Email Address" variant="outlined" fullWidth className='mar-5' value={values.email} onChange={handleChange('email')} />
           {/* <TextField id="outlined-basic" label="Password" variant="outlined" fullWidth className='mar-5' value="{password}" type="password" />
           <TextField id="outlined-basic" label="Confim Password" variant="outlined" fullWidth className='mar-5' value="{confirmPassword}" type="password" /> */}
