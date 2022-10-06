@@ -14,7 +14,7 @@ export default function Signup() {
   }
 
   function createUser() {
-    //process.env.REACT_APP_URL
+    //process.env.REACT_APP_API_URL
   }
 
   return (
