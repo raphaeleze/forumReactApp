@@ -19,7 +19,6 @@ export default function Signup() {
 
   return (
     <div>
-      <Button variant="contained" onClick={navBack} className='mar-5'>Go back</Button>
       <Box
         component="form"
         sx={{
@@ -35,6 +34,7 @@ export default function Signup() {
         </div>
         <div className='frontpageButtons'>
           <Button variant="outlined" onClick={createUser}>Sign up</Button>
+          <Button onClick={navBack} className='mar-5'>Go back</Button>
         </div>
       </Box>
     </div>
