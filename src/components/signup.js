@@ -18,6 +18,7 @@ import FormControl from '@mui/material/FormControl';
 export default function Signup() {
 
   const navigate = useNavigate();
+  //require('dotenv').config();
 
   function navBack() {
     navigate(process.env.PUBLIC_URL + "/")
@@ -37,7 +38,10 @@ export default function Signup() {
         body: JSON.stringify(userData)
       };
 
-      fetch(`${process.env.REACT_APP_API_URL}/users/add`, requestOptions)
+      const URL = process.env.REACT_APP_API_URL
+
+      console.log(URL);
+      fetch(`${URL}/users/add`, requestOptions)
         .then(response => response.json())
         .then(data => function(data){
           debugger;
