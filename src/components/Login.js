@@ -8,40 +8,35 @@ import ButtonAppBar from './Appbar';
 import NavButtonsLoginSignup from './Nav';
 
 export default function Login() {
-//         <Link to ="components/signup"> ignup</Link>
+  //         <Link to ="components/signup"> ignup</Link>
 
-//     const [name, setName] = useState('')
-//     const [address, setAddress] = useState('')
+  //     const [name, setName] = useState('')
+  //     const [address, setAddress] = useState('')
 
-//     const handleClick = (e)=>{
-//         e.preventDefault()
-//         const user = {name, address}
-//         console.log (user)
-//         fetch("http://localhost:8080/forum/users/add",{
-//         method:"POST",
-//         headers: {"Content-Type":"application/json"},
-//         body:JSON.stringify(user)
+  //     const handleClick = (e)=>{
+  //         e.preventDefault()
+  //         const user = {name, address}
+  //         console.log (user)
+  //         fetch("http://localhost:8080/forum/users/add",{
+  //         method:"POST",
+  //         headers: {"Content-Type":"application/json"},
+  //         body:JSON.stringify(user)
 
-//     }).then(()=>{
-//         console.log("new user adde)")
-//     })
-// }
+  //     }).then(()=>{
+  //         console.log("new user adde)")
+  //     })
+  // }
 
 
 
 
   return (
-    
-    <Box
-    
-      component="form"
+
+    <Box component="form"
       sx={{
-        '& > :not(style)': { padding:"50px 20px" , width:300,margin:"20px auto" },
+        '& > :not(style)': { padding: "50px 20px", width: 300, margin: "20px auto" },
       }}
-      noValidate
-      autoComplete="off"
-      
-    >
+      noValidate autoComplete="off" >
 
       {/* <TextField id="outlined-basic" label="Email Address" variant="outlined" fullWidth
       value={address}onChange={(e) =>setAddress(e.target.value)}/>
@@ -49,12 +44,9 @@ export default function Login() {
       value={name}onChange={(e) =>setName(e.target.value)}/> */}
 
 
-      <TextField id="outlined-basic" label="Email Address" variant="outlined" fullWidth
-     />
-      <TextField id="outlined-basic" label="Password" variant="outlined" fullWidth  
-      />
+      <TextField id="outlined-basic" label="Email Address" variant="outlined" fullWidth />
+      <TextField id="outlined-basic" label="Password" variant="outlined" fullWidth />
       <NavButtonsLoginSignup></NavButtonsLoginSignup>
-
 
     </Box>
   );
