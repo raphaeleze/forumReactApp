@@ -1,25 +1,26 @@
 import logo from './logo.svg';
 import './App.css';
+import ButtonAppBar, { AppBar } from './components/Appbar';
+import Login from './components/Login';
+import Signup from './components/signup';
+import Homepage from './components/Homepage';
+import NavButtonsLoginSignup from './components/Nav';
+import Router from './Router';
+
+
 
 function App() {
   return (
+
+
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+<ButtonAppBar></ButtonAppBar>
+
+<Router></Router>
+
+</div>
   );
 }
 
 export default App;
+
