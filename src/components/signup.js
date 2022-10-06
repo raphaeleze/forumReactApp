@@ -6,41 +6,31 @@ import { BrowserRouter, Route, Link, useNavigate } from "react-router-dom";
 
 
 export default function Signup() {
-    
+
 
   const navigate = useNavigate();
-  function change(){
+  function change() {
 
     //if else to validate sign up should be added here
-      navigate(process.env.PUBLIC_URL+"/")
+    navigate(process.env.PUBLIC_URL + "/")
   }
 
 
   return (
     <Box
-    
       component="form"
       sx={{
-        '& > :not(style)': { padding:"50px 20px" , width:300,margin:"20px auto" },
-      }}
-      noValidate
-      autoComplete="off"
-      
-    >
-      <TextField id="outlined-basic" label="Name" variant="outlined" fullWidth/>
-      <TextField id="outlined-basic" label="Email Address" variant="outlined" fullWidth
-      />
-        <TextField id="outlined-basic" label="Password" variant="outlined" fullWidth
-      />
-            <TextField id="outlined-basic" label="Confim Password" variant="outlined" fullWidth
-      />
-      <div className='frontpageButtons'>
-            <Button color="secondary"onClick={change}>sign up</Button>
+        '& > :not(style)': { padding: "50px 20px", width: 300, margin: "20px auto" },
+      }} noValidate autoComplete="off" >
+      <div>
+        <TextField id="outlined-basic" label="Name" variant="outlined" fullWidth className='mar-5'/>
+        <TextField id="outlined-basic" label="Email Address" variant="outlined" fullWidth className='mar-5'/>
+        <TextField id="outlined-basic" label="Password" variant="outlined" fullWidth className='mar-5'/>
+        <TextField id="outlined-basic" label="Confim Password" variant="outlined" fullWidth className='mar-5'/>
       </div>
-
-
-
-
+      <div className='frontpageButtons'>
+        <Button variant="outlined" onClick={change}>sign up</Button>
+      </div>
     </Box>
   );
 }

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import '../App.css';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { useState } from 'react';
@@ -36,16 +37,17 @@ export default function Login() {
       sx={{
         '& > :not(style)': { padding: "50px 20px", width: 300, margin: "20px auto" },
       }}
-      noValidate autoComplete="off" >
+      noValidate autoComplete="off" className='disp-block'>
 
       {/* <TextField id="outlined-basic" label="Email Address" variant="outlined" fullWidth
       value={address}onChange={(e) =>setAddress(e.target.value)}/>
       <TextField id="outlined-basic" label="" variant="outlined" fullWidth  
       value={name}onChange={(e) =>setName(e.target.value)}/> */}
 
-
-      <TextField id="outlined-basic" label="Email Address" variant="outlined" fullWidth />
-      <TextField id="outlined-basic" label="Password" variant="outlined" fullWidth />
+      <div>
+        <TextField id="outlined-basic" label="Email Address" variant="outlined" fullWidth className='mar-5'/>
+        <TextField id="outlined-basic" label="Password" variant="outlined" fullWidth  className='mar-5'/>
+      </div>
       <NavButtonsLoginSignup></NavButtonsLoginSignup>
 
     </Box>
