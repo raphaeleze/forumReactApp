@@ -45,8 +45,8 @@ export default function Login() {
       value={name}onChange={(e) =>setName(e.target.value)}/> */}
 
       <div>
-        <TextField id="outlined-basic" label="Email Address" variant="outlined" fullWidth className='mar-5'/>
-        <TextField id="outlined-basic" label="Password" variant="outlined" fullWidth  className='mar-5'/>
+        <TextField label="Email Address" variant="outlined" fullWidth className='mar-5'/>
+        <TextField label="Password" variant="outlined" fullWidth  className='mar-5'/>
       </div>
       <NavButtonsLoginSignup></NavButtonsLoginSignup>
 
