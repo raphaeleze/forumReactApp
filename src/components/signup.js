@@ -2,7 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
-import { BrowserRouter, Route, Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
 
 import IconButton from '@mui/material/IconButton';
@@ -14,21 +14,46 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export default function Signup() {
 
   const navigate = useNavigate();
-  //require('dotenv').config();
+
+  const initValues = {
+    userName: '',
+    userNameError: false,
+    email: '',
+    emailError: false,
+    password: '',
+    confirmPassword: '',
+    showPasswordConfirm: false,
+    showPassword: false
+  };
+
+  const [values, setValues] = useState(JSON.parse(JSON.stringify(initValues)));
+
 
   function navBack() {
     navigate(process.env.PUBLIC_URL + "/")
+  }
+
+  const notify = (text, type, duration = 5000) => {
+
+    const options = {
+      autoClose: duration,
+      type: type //toast.TYPE.INFO
+    }
+    toast(text, options);
   }
 
   /**
    * Calls the API from creating the user
    */
   function createUser() {
-    //process.env.REACT_APP_API_URL
+
     if (validInputs()) {
       const userData = { "email": values.email, "username": values.userName, "password": values.password };
 
@@ -39,18 +64,39 @@ export default function Signup() {
       };
 
       const URL = process.env.REACT_APP_API_URL
+      let callStatus = 200;
 
-      console.log(URL);
-      fetch(`${URL}/users/add`, requestOptions)
-        .then(response => response.json())
-        .then(data => function(data){
-          debugger;
-          console.log("Succeed")
-        });
+      try {
+        fetch(`${URL}/users/add`, requestOptions)
+          /*.then(err => {
+            if (err.status == 400) {
+              callStatus = err.status
+            }
+          })*/
+          .then(response => response.json())
+          .then(data => {
+            let msg = '';
 
+            if (data.msg) {
+              msg = data.msg;
+            }
 
+            let status = callStatus !== 400 ? "success" : "error";
+
+            notify(msg, status);
+
+            navBack();
+          })
+          .catch(err => {
+            notify("Something went wrong", "error");
+            console.log(err)
+          });
+
+      } catch (err) {
+        notify("Something went wrong", "error");
+      }
     } else {
-      console.log("Check your inputs!")
+      notify("Check your inputs!", "error");
     }
 
   }
@@ -58,26 +104,28 @@ export default function Signup() {
   /**
    * Verifies if the user inputs are valid
    */
-  function validInputs(){
+  function validInputs() {
     let veredict = true;
 
-    if(!values.email){
+    if (!values.email /*|| !isEmail(values.email)*/) {
+      veredict = false;
+      values.emailError = true;
+    }
+
+    if (!values.userName) {
+      veredict = false;
+      values.userNameError = true;
+    }
+
+    if (!values.password) {
       veredict = false;
     }
 
-    if(!values.userName){
+    if (!values.confirmPassword) {
       veredict = false;
     }
 
-    if(!values.password){
-      veredict = false;
-    }
-
-    if(!values.confirmPassword){
-      veredict = false;
-    }
-
-    if(values.password !== values.confirmPassword){
+    if (values.password !== values.confirmPassword) {
       veredict = false;
     }
 
@@ -88,30 +136,9 @@ export default function Signup() {
    * Sets all the fields of the form to blank
    */
   function clearForm() {
-    setValues({
-      userName: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
-      showPasswordConfirm: false,
-      showPassword: false
-    });
+    setValues(JSON.parse(JSON.stringify(initValues)));
   }
 
-  /*
-  *************************************
-  For password visibility
-  *************************************
-  */
-
-  const [values, setValues] = useState({
-    userName: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-    showPasswordConfirm: false,
-    showPassword: false
-  });
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
@@ -135,6 +162,15 @@ export default function Signup() {
     event.preventDefault();
   };
 
+  function isEmail(val) {
+    let regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (!regEmail.test(val)) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   return (
     <div>
       <Box
@@ -145,8 +181,8 @@ export default function Signup() {
 
         <div>
           <h4>Registration form</h4>
-          <TextField label="Username" variant="outlined" fullWidth className='mar-5' value={values.userName} onChange={handleChange('userName')} />
-          <TextField label="Email Address" variant="outlined" fullWidth className='mar-5' value={values.email} onChange={handleChange('email')} />
+          <TextField label="Username" variant="outlined" fullWidth className='mar-5' value={values.userName} onChange={handleChange('userName')} error={values.userNameError} />
+          <TextField label="Email Address" variant="outlined" fullWidth className='mar-5' value={values.email} onChange={handleChange('email')} error={values.emailError} />
           {/* <TextField id="outlined-basic" label="Password" variant="outlined" fullWidth className='mar-5' value="{password}" type="password" />
           <TextField id="outlined-basic" label="Confim Password" variant="outlined" fullWidth className='mar-5' value="{confirmPassword}" type="password" /> */}
           <FormControl variant="outlined" className='mar-5' fullWidth>

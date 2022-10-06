@@ -9,47 +9,23 @@ import ButtonAppBar from './Appbar';
 import NavButtonsLoginSignup from './Nav';
 
 export default function Login() {
-  //         <Link to ="components/signup"> ignup</Link>
-
-  //     const [name, setName] = useState('')
-  //     const [address, setAddress] = useState('')
-
-  //     const handleClick = (e)=>{
-  //         e.preventDefault()
-  //         const user = {name, address}
-  //         console.log (user)
-  //         fetch("http://localhost:8080/forum/users/add",{
-  //         method:"POST",
-  //         headers: {"Content-Type":"application/json"},
-  //         body:JSON.stringify(user)
-
-  //     }).then(()=>{
-  //         console.log("new user adde)")
-  //     })
-  // }
-
-
-
 
   return (
+    <div className='mar-5'>
+      <h4>Login form</h4>
+      <Box component="form"
+        // sx={{
+        //   '& > :not(style)': { padding: "50px 20px", width: 300, margin: "20px auto" },
+        // }}
+        noValidate autoComplete="off" className='disp-block mar-5'>
 
-    <Box component="form"
-      sx={{
-        '& > :not(style)': { padding: "50px 20px", width: 300, margin: "20px auto" },
-      }}
-      noValidate autoComplete="off" className='disp-block'>
+        <div>
+          <TextField label="Email Address" variant="outlined" fullWidth className='mar-5' />
+          <TextField label="Password" variant="outlined" fullWidth className='mar-5' />
+        </div>
+        <NavButtonsLoginSignup></NavButtonsLoginSignup>
 
-      {/* <TextField id="outlined-basic" label="Email Address" variant="outlined" fullWidth
-      value={address}onChange={(e) =>setAddress(e.target.value)}/>
-      <TextField id="outlined-basic" label="" variant="outlined" fullWidth  
-      value={name}onChange={(e) =>setName(e.target.value)}/> */}
-
-      <div>
-        <TextField label="Email Address" variant="outlined" fullWidth className='mar-5'/>
-        <TextField label="Password" variant="outlined" fullWidth  className='mar-5'/>
-      </div>
-      <NavButtonsLoginSignup></NavButtonsLoginSignup>
-
-    </Box>
+      </Box>
+    </div>
   );
 }
