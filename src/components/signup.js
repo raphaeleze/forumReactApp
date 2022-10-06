@@ -9,28 +9,33 @@ export default function Signup() {
 
 
   const navigate = useNavigate();
-  function change() {
-
-    //if else to validate sign up should be added here
+  function navBack() {
     navigate(process.env.PUBLIC_URL + "/")
   }
 
+  function createUser(){
+
+  }
 
   return (
+    <div>
+    <Button variant="contained" onClick={navBack} className='mar-5'>Go back</Button>
     <Box
       component="form"
       sx={{
         '& > :not(style)': { padding: "50px 20px", width: 300, margin: "20px auto" },
       }} noValidate autoComplete="off" >
+
       <div>
+        <h4>Registration form</h4>
         <TextField id="outlined-basic" label="Name" variant="outlined" fullWidth className='mar-5'/>
         <TextField id="outlined-basic" label="Email Address" variant="outlined" fullWidth className='mar-5'/>
         <TextField id="outlined-basic" label="Password" variant="outlined" fullWidth className='mar-5'/>
         <TextField id="outlined-basic" label="Confim Password" variant="outlined" fullWidth className='mar-5'/>
       </div>
       <div className='frontpageButtons'>
-        <Button variant="outlined" onClick={change}>sign up</Button>
+        <Button variant="outlined" onClick={createUser}>sign up</Button>
       </div>
-    </Box>
+    </Box></div>
   );
 }
