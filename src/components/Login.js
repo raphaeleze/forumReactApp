@@ -29,7 +29,10 @@ export default function Login() {
   }
 
   function onLogin() {
-    navigate(process.env.PUBLIC_URL + "/Homepage");
+
+    if(values.email && values.password){
+      navigate(process.env.PUBLIC_URL + "/Homepage");
+    }
   }
 
   const handleChange = (prop) => (event) => {
