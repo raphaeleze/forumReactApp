@@ -43,7 +43,6 @@ export default function Signup() {
   }
 
   const notify = (text, type, duration = 5000) => {
-
     const options = {
       autoClose: duration,
       type: type //toast.TYPE.INFO
