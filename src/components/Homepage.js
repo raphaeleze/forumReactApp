@@ -8,19 +8,42 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Createpost from './createpost';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import Avatar from '@mui/material/Avatar';
+import { OnDeviceTrainingTwoTone } from '@mui/icons-material';
 
 export default function ActionAreaCard() {
 
+  const [first, setfirst] = useState()
 
+  useEffect(() => {
+    
+    fetch()
+    .then()
+    .then(res => {
+      setfirst(first)
+    })
+    
+  }, [])
+  
+  //use state
+  //fetch
 
 
   return (
 
     <div className='pad-25'>
       <div className='threadTitleBar'>
-        <h4>Threads</h4>
+        <h2>Threads</h2>
         <Createpost />
       </div>
+
+      {
+      first.map((item, index) => {
+        return (
+          <></>
+        )
+      })
+      }
+
 
       <Card className="thread-card">
         <CardActionArea>

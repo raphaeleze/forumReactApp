@@ -24,13 +24,13 @@ export default function Createpost() {
     <div>
       <Button variant="contained" onClick={handleClickOpen}>
         Create new thread
-        <AddCircleOutlineIcon></AddCircleOutlineIcon>
+        {/* <AddCircleOutlineIcon></AddCircleOutlineIcon> */}
       </Button>
       <Dialog open={open} onClose={handleClose} fullWidth={true} maxWidth="md">
         <DialogTitle>New thread</DialogTitle>
         <DialogContent>
-          <TextField autoFocus margin="dense" id="name" label="Thread title"  />
-          <TextField margin="dense" id="outlined-textarea" label="Your content here" fullWidth multiline maxRows={15} rows={5}/>
+          <TextField autoFocus margin="dense" id="name" label="Thread title" />
+          <TextField margin="dense" id="outlined-textarea" label="Your content here" fullWidth multiline maxRows={15} rows={5} />
         </DialogContent>
         <DialogActions>
           <Button variant="contained" onClick={handleClose}>Publish</Button>
