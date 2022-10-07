@@ -23,32 +23,18 @@ export default function Createpost() {
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
-        Create Post <AddCircleOutlineIcon></AddCircleOutlineIcon>
-
+        Create new post
+        <AddCircleOutlineIcon></AddCircleOutlineIcon>
       </Button>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>POST</DialogTitle>
+      <Dialog open={open} onClose={handleClose} fullWidth={true} maxWidth="md">
+        <DialogTitle>New post</DialogTitle>
         <DialogContent>
-
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Title:"
-            
-          />
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="WRITE ANYTHING"
-            fullWidth
-            variant="standard"
-          />
+          <TextField autoFocus margin="dense" id="name" label="Post title"  />
+          <TextField margin="dense" id="name" label="Your content here" fullWidth variant="standard" multiline maxRows={15} rows={5}/>
         </DialogContent>
         <DialogActions>
+          <Button variant="contained" onClick={handleClose}>Publish</Button>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Share</Button>
         </DialogActions>
       </Dialog>
     </div>

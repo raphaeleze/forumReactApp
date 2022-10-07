@@ -53,3 +53,8 @@
 .bg-toolbar{
   background-color: #282c34 ;
 }
+
+.dialogThread{
+  width: 45em;
+  height: 60em;
+}
