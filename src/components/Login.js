@@ -8,6 +8,8 @@ import { BrowserRouter, Route, Link } from "react-router-dom";
 import ButtonAppBar from './Appbar';
 import NavButtonsLoginSignup from './Nav';
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Login() {
 
@@ -30,9 +32,58 @@ export default function Login() {
 
   function onLogin() {
 
-    if(values.email && values.password){
-      navigate(process.env.PUBLIC_URL + "/Homepage");
+    if (validInputs()) {
+
+      const userData = { "email": values.email, "password": values.password };
+
+      const requestOptions = {
+        method: 'POST',
+        headers: { 
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'},
+        body: JSON.stringify(userData)
+      };
+
+      const URL = process.env.REACT_APP_API_URL
+      let callStatus = 200;
+
+      fetch(`${URL}/users/login`, requestOptions)
+        .then(response => {
+          console.log(response)
+          if (response.status == 400) { //For catching error
+            callStatus = response.status;
+            throw response.json()
+          } else {
+            return response.json()
+          }
+        }).then(data => {
+          let msg = '';
+
+          if (data.msg) {
+            msg = data.msg;
+          }
+
+          let status = callStatus !== 400 ? "success" : "error";
+
+          notify(msg, status);
+          navigate(process.env.PUBLIC_URL + "/Homepage");
+
+        })
+        .catch(err => {
+          notify("Something went wrong", "error");
+          console.log(err)
+        });
+    } else {
+      notify("Check your inputs!", "error");
     }
+  }
+
+  const notify = (text, type, duration = 5000) => {
+    const options = {
+      autoClose: duration,
+      type: type //toast.TYPE.INFO
+    }
+    toast(text, options);
   }
 
   const handleChange = (prop) => (event) => {
@@ -65,6 +116,24 @@ export default function Login() {
     } else {
       return true;
     }
+  }
+
+  function validInputs() {
+    let veredict = true;
+
+    if (!values.email || !isEmail(values.email)) {
+      veredict = false;
+      values.emailError = true;
+    } else {
+      values.emailError = false;
+    }
+
+    if (!values.password) {
+      veredict = false;
+      values.passwordError = true;
+    }
+
+    return veredict;
   }
 
   return (
