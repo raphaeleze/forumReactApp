@@ -7,6 +7,7 @@ import { Button } from '@mui/material';
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import ButtonAppBar from './Appbar';
 import NavButtonsLoginSignup from './Nav';
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
 
@@ -20,6 +21,16 @@ export default function Login() {
 
   // const [values, setValues] = useState(JSON.parse(JSON.stringify(initValues)));
   const [values, setValues] = useState(initValues);
+
+  const navigate = useNavigate();
+
+  function onSignUp() {
+    navigate(process.env.PUBLIC_URL + "/signup");
+  }
+
+  function onLogin() {
+    navigate(process.env.PUBLIC_URL + "/Homepage");
+  }
 
   const handleChange = (prop) => (event) => {
 
@@ -40,7 +51,7 @@ export default function Login() {
         }
         break;
     }
-    
+
     setValues({ ...values, [prop]: event.target.value });
   };
 
@@ -59,11 +70,15 @@ export default function Login() {
       <Box component="form" noValidate autoComplete="off" className='disp-block mar-5'>
         <div>
           <TextField label="Email Address" type="email" variant="outlined" fullWidth
-            className='mar-5' value={values.email} onChange={handleChange('email')} error={values.emailError}/>
+            className='mar-5' value={values.email} onChange={handleChange('email')} error={values.emailError} />
           <TextField label="Password" type="password" variant="outlined" fullWidth
-            className='mar-5' value={values.password} onChange={handleChange('password')} error={values.passwordError}/>
+            className='mar-5' value={values.password} onChange={handleChange('password')} error={values.passwordError} />
         </div>
-        <NavButtonsLoginSignup></NavButtonsLoginSignup>
+        <div className='frontpageButtons mar-5'>
+          <Button variant="contained" onClick={onLogin} className='mar-5'>Login</Button>
+          <Button variant="outlined" onClick={onSignUp} className='mar-5'>Sign up</Button>
+        </div>
+        {/* <NavButtonsLoginSignup></NavButtonsLoginSignup> */}
       </Box>
     </div>
   );

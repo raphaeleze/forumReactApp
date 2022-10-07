@@ -12,17 +12,17 @@ import { OnDeviceTrainingTwoTone } from '@mui/icons-material';
 
 export default function ActionAreaCard() {
 
-  const [first, setfirst] = useState()
+  // const [first, setfirst] = useState()
 
-  useEffect(() => {
+  // useEffect(() => {
     
-    fetch()
-    .then()
-    .then(res => {
-      setfirst(first)
-    })
+  //   fetch()
+  //   .then()
+  //   .then(res => {
+  //     setfirst(first)
+  //   })
     
-  }, [])
+  // }, [])
   
   //use state
   //fetch
@@ -36,13 +36,13 @@ export default function ActionAreaCard() {
         <Createpost />
       </div>
 
-      {
+      {/* {
       first.map((item, index) => {
         return (
           <></>
         )
       })
-      }
+      } */}
 
 
       <Card className="thread-card">
