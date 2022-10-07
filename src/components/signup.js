@@ -29,11 +29,13 @@ export default function Signup() {
     emailError: false,
     password: '',
     confirmPassword: '',
+    passwordError: false,
     showPasswordConfirm: false,
     showPassword: false
   };
 
-  const [values, setValues] = useState(JSON.parse(JSON.stringify(initValues)));
+  // const [values, setValues] = useState(JSON.parse(JSON.stringify(initValues)));
+  const [values, setValues] = useState(initValues);
 
 
   function navBack() {
@@ -68,21 +70,15 @@ export default function Signup() {
 
       try {
         fetch(`${URL}/users/add`, requestOptions)
-          // .then(err => {
-          //   if (err.status == 400) {
-          //     callStatus = err.status
-          //   }
-          // })
           .then(response => {
             console.log(response)
-            if (response.status !== 200) {
+            if (response.status == 400) { //For catching error
+              callStatus = response.status;
               throw response.json()
             } else {
               return response.json()
             }
-          })
-          // .then(response => response.json())
-          .then(data => {
+          }).then(data => {
             let msg = '';
 
             if (data.msg) {
@@ -115,26 +111,34 @@ export default function Signup() {
   function validInputs() {
     let veredict = true;
 
-    if (!values.email /*|| !isEmail(values.email)*/) {
+    if (!values.email || !isEmail(values.email)) {
       veredict = false;
       values.emailError = true;
+    } else {
+      values.emailError = false;
     }
 
     if (!values.userName) {
       veredict = false;
       values.userNameError = true;
+    } else {
+      values.userNameError = false;
     }
 
     if (!values.password) {
       veredict = false;
+      values.passwordError = true;
     }
 
     if (!values.confirmPassword) {
       veredict = false;
+      values.passwordError = true;
     }
 
     if (values.password !== values.confirmPassword) {
       veredict = false;
+    } else {
+      values.passwordError = false;
     }
 
     return veredict;
@@ -149,6 +153,9 @@ export default function Signup() {
 
 
   const handleChange = (prop) => (event) => {
+
+    validInputs()
+
     setValues({ ...values, [prop]: event.target.value });
   };
 
@@ -180,19 +187,16 @@ export default function Signup() {
   }
 
   return (
-    <div>
+    <div className='mar-5 width50 disp-block '>
       <Box
+        className='mar-5'
         component="form"
-        sx={{
-          '& > :not(style)': { padding: "50px 20px", width: 300, margin: "20px auto" },
-        }} noValidate autoComplete="off" >
+        noValidate autoComplete="off" >
 
         <div>
           <h4>Registration form</h4>
           <TextField label="Username" variant="outlined" fullWidth className='mar-5' value={values.userName} onChange={handleChange('userName')} error={values.userNameError} />
           <TextField label="Email Address" variant="outlined" fullWidth className='mar-5' value={values.email} onChange={handleChange('email')} error={values.emailError} />
-          {/* <TextField id="outlined-basic" label="Password" variant="outlined" fullWidth className='mar-5' value="{password}" type="password" />
-          <TextField id="outlined-basic" label="Confim Password" variant="outlined" fullWidth className='mar-5' value="{confirmPassword}" type="password" /> */}
           <FormControl variant="outlined" className='mar-5' fullWidth>
             <InputLabel htmlFor="password">Password</InputLabel>
             <OutlinedInput fullWidth
@@ -200,6 +204,7 @@ export default function Signup() {
               label="Password"
               type={values.showPassword ? 'text' : 'password'}
               value={values.password}
+              error={values.passwordError}
               onChange={handleChange('password')}
               endAdornment={
                 <InputAdornment position="end">
@@ -211,8 +216,7 @@ export default function Signup() {
                     {values.showPassword ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
                 </InputAdornment>
-              }
-            />
+              } />
           </FormControl>
           <FormControl variant="outlined" className='mar-5' fullWidth>
             <InputLabel htmlFor="confirm-password">Confirm password</InputLabel>
@@ -221,6 +225,7 @@ export default function Signup() {
               label="Confirm password"
               type={values.showPasswordConfirm ? 'text' : 'password'}
               value={values.confirmPassword}
+              error={values.passwordError}
               onChange={handleChange('confirmPassword')}
               endAdornment={
                 <InputAdornment position="end">
@@ -232,12 +237,11 @@ export default function Signup() {
                     {values.showPasswordConfirm ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
                 </InputAdornment>
-              }
-            />
+              } />
           </FormControl>
         </div>
         <div className='frontpageButtons'>
-          <Button variant="contained" onClick={createUser}>Sign up</Button>
+          <Button variant="contained" onClick={createUser} className='mar-5'>Sign up</Button>
           <Button variant="outlined" onClick={navBack} className='mar-5'>Go back</Button>
         </div>
         <Button onClick={clearForm} className='mar-5'>Clear form</Button>

@@ -38,9 +38,18 @@
 }
 
 .disp-block{
-  display: inline-block;
+  display: inline-grid;
 }
 
 .mar-5{
   margin: 5px !important;
+}
+
+.width50{
+  width: 50%;
+  max-width: 30em;
+}
+
+.bg-toolbar{
+  background-color: #282c34 ;
 }
