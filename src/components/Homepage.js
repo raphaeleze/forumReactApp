@@ -1,14 +1,5 @@
 import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
 import Createpost from './createpost';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import Avatar from '@mui/material/Avatar';
-import { OnDeviceTrainingTwoTone } from '@mui/icons-material';
 import { useState, useEffect } from 'react';
 import ThreadCard from './ThreadCard';
 
@@ -22,12 +13,6 @@ export default function ActionAreaCard() {
     headers: { 
       'Accept': 'application/json'}
   };
-
-  // fetch(`${URL}/users/threads/`, requestOptions)
-  // .then(res => res.json())
-  // .then(res => {
-  //   setThreadList(res)
-  // })
 
   useEffect(() => {
     fetch(`${URL}/threads/`, requestOptions)
@@ -52,8 +37,6 @@ export default function ActionAreaCard() {
           )
         })
       }
-      {/* <ThreadCard title="Hi!" body="hello, this is the body of the Card"></ThreadCard> */}
-
     </div>
   );
 }
