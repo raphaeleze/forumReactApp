@@ -9,6 +9,7 @@ import Createpost from './createpost';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import Avatar from '@mui/material/Avatar';
 import { OnDeviceTrainingTwoTone } from '@mui/icons-material';
+import threadCard from './threadCard';
 
 export default function ActionAreaCard() {
 
@@ -43,7 +44,7 @@ export default function ActionAreaCard() {
         )
       })
       } */}
-
+<threadCard title="Hi!" body="hello, this is the body of the Card"></threadCard>
 
       <Card className="thread-card">
         <CardActionArea>
