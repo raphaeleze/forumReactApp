@@ -9,24 +9,24 @@ import Createpost from './createpost';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import Avatar from '@mui/material/Avatar';
 import { OnDeviceTrainingTwoTone } from '@mui/icons-material';
+import { useState, useEffect } from 'react';
 import threadCard from './threadCard';
 
 export default function ActionAreaCard() {
 
-  // const [first, setfirst] = useState()
+  const [first, setfirst] = useState([])
 
-  // useEffect(() => {
+  useEffect(() => {
     
-  //   fetch()
-  //   .then()
-  //   .then(res => {
-  //     setfirst(first)
-  //   })
+    fetch('http://192.168.1.75:8080/forum/threads')
+    .then(res => res.json)
+    .then(res => {
+      setfirst(res)
+    })
     
-  // }, [])
+  }, [])
   
-  //use state
-  //fetch
+
 
 
   return (
@@ -45,6 +45,9 @@ export default function ActionAreaCard() {
       })
       } */}
 <threadCard title="Hi!" body="hello, this is the body of the Card"></threadCard>
+      {first.map((thread) => (
+        <Card className="thread-card">
+        <CardActionArea>
 
       <Card className="thread-card">
         <CardActionArea>
