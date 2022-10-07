@@ -9,10 +9,7 @@ import Createpost from './createpost';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import Avatar from '@mui/material/Avatar';
 
-export default function threadCard() {
-
-
-
+export default function ThreadCard(props) {
 
     return (
 
@@ -21,10 +18,10 @@ export default function threadCard() {
                 <CardContent>
                     <Avatar alt="Rodrigo G" src="components/images/avater.png" />
                     <Typography gutterBottom variant="h5" component="div">
-                        {prop.title}
+                        {props.title}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                        {prop.body}
+                        {props.body}
                     </Typography>
                 </CardContent>
             </CardActionArea>

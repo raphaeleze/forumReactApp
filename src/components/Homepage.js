@@ -10,24 +10,32 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import Avatar from '@mui/material/Avatar';
 import { OnDeviceTrainingTwoTone } from '@mui/icons-material';
 import { useState, useEffect } from 'react';
-import threadCard from './threadCard';
+import ThreadCard from './ThreadCard';
 
 export default function ActionAreaCard() {
 
-  const [first, setfirst] = useState([])
+  const [threadList, setThreadList] = useState([{title: 'test', body:'hey'}])
+  const URL = process.env.REACT_APP_API_URL
+
+  const requestOptions = {
+    method: 'GET',
+    headers: { 
+      'Accept': 'application/json'}
+  };
+
+  // fetch(`${URL}/users/threads/`, requestOptions)
+  // .then(res => res.json())
+  // .then(res => {
+  //   setThreadList(res)
+  // })
 
   useEffect(() => {
-    
-    fetch('http://192.168.1.75:8080/forum/threads')
-    .then(res => res.json)
-    .then(res => {
-      setfirst(res)
-    })
-    
-  }, [])
-  
-
-
+    fetch(`${URL}/threads/`, requestOptions)
+      .then(res => res.json())
+      .then(res => {
+        setThreadList(res)
+      })
+  }, []);
 
   return (
 
@@ -37,75 +45,15 @@ export default function ActionAreaCard() {
         <Createpost />
       </div>
 
-      {/* {
-      first.map((item, index) => {
-        return (
-          <></>
-        )
-      })
-      } */}
-<threadCard title="Hi!" body="hello, this is the body of the Card"></threadCard>
-      {first.map((thread) => (
-        <Card className="thread-card">
-        <CardActionArea>
+      {
+        threadList.map((item, index) => {
+          return (
+            <ThreadCard title={item.title} body={item.creationDate}></ThreadCard>
+          )
+        })
+      }
+      {/* <ThreadCard title="Hi!" body="hello, this is the body of the Card"></ThreadCard> */}
 
-      <Card className="thread-card">
-        <CardActionArea>
-
-          <CardContent>
-            <Avatar alt="Rodrigo G" src="components/images/avater.png" />
-
-            <Typography gutterBottom variant="h5" component="div">
-              Title
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              This will be a post created by the user:
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco
-              dolor in reprehenderit in voluptate velit esse cillum dolore eu
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-        <CardActions>
-          <div style={{ width: '100%' }}>
-            <Button size="small" color="primary">
-              Delete <DeleteIcon></DeleteIcon>
-            </Button>
-          </div>
-
-          <FavoriteBorderIcon ></FavoriteBorderIcon>
-        </CardActions>
-      </Card>
-
-      <Card className="thread-card">
-        <CardActionArea>
-
-          <CardContent>
-            <Avatar alt="Luis Z" src="/components/images/avater.png" />
-
-            <Typography gutterBottom variant="h5" component="div">
-              Title
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              This will be a post created by the user:
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco
-              dolor in reprehenderit in voluptate velit esse cillum dolore eu
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-        <CardActions>
-          <div style={{ width: '100%' }}>
-            <Button size="small" color="primary">
-              Delete <DeleteIcon></DeleteIcon>
-            </Button>
-          </div>
-
-          <FavoriteBorderIcon ></FavoriteBorderIcon>
-        </CardActions>
-      </Card>
     </div>
   );
 }
