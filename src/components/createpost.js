@@ -22,15 +22,15 @@ export default function Createpost() {
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Create new post
+      <Button variant="contained" onClick={handleClickOpen}>
+        Create new thread
         <AddCircleOutlineIcon></AddCircleOutlineIcon>
       </Button>
       <Dialog open={open} onClose={handleClose} fullWidth={true} maxWidth="md">
-        <DialogTitle>New post</DialogTitle>
+        <DialogTitle>New thread</DialogTitle>
         <DialogContent>
-          <TextField autoFocus margin="dense" id="name" label="Post title"  />
-          <TextField margin="dense" id="name" label="Your content here" fullWidth variant="standard" multiline maxRows={15} rows={5}/>
+          <TextField autoFocus margin="dense" id="name" label="Thread title"  />
+          <TextField margin="dense" id="outlined-textarea" label="Your content here" fullWidth multiline maxRows={15} rows={5}/>
         </DialogContent>
         <DialogActions>
           <Button variant="contained" onClick={handleClose}>Publish</Button>

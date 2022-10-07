@@ -32,29 +32,43 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
 
-.disp-block{
+.disp-block {
   display: inline-grid;
 }
 
-.mar-5{
+.mar-5 {
   margin: 5px !important;
 }
 
-.width50{
+.width50 {
   width: 50%;
   max-width: 30em;
 }
 
-.bg-toolbar{
-  background-color: #282c34 ;
+.bg-toolbar {
+  background-color: #282c34;
 }
 
-.dialogThread{
-  width: 45em;
-  height: 60em;
+.threadTitleBar {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  align-items: center;
+}
+
+.pad-25 {
+  padding: 0 20%;
+}
+
+.thread-card {
+  /* maxWidth: 900px;
+    padding: 50px 20px;
+    width: 800px;*/
+  margin: 20px auto;
 }
