@@ -9,23 +9,23 @@ import Createpost from './createpost';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import Avatar from '@mui/material/Avatar';
 import { OnDeviceTrainingTwoTone } from '@mui/icons-material';
+import { useState, useEffect } from 'react';
 
 export default function ActionAreaCard() {
 
-  // const [first, setfirst] = useState()
+  const [first, setfirst] = useState([])
 
-  // useEffect(() => {
+  useEffect(() => {
     
-  //   fetch()
-  //   .then()
-  //   .then(res => {
-  //     setfirst(first)
-  //   })
+    fetch('http://192.168.1.75:8080/forum/threads')
+    .then(res => res.json)
+    .then(res => {
+      setfirst(res)
+    })
     
-  // }, [])
+  }, [])
   
-  //use state
-  //fetch
+
 
 
   return (
@@ -44,7 +44,36 @@ export default function ActionAreaCard() {
       })
       } */}
 
+      {first.map((thread) => (
+        <Card className="thread-card">
+        <CardActionArea>
 
+          <CardContent>
+            <Avatar alt="Rodrigo G" src="components/images/avater.png" />
+
+            <Typography gutterBottom variant="h5" component="div">
+              {thread.title}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              This will be a post created by the user:
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco
+              dolor in reprehenderit in voluptate velit esse cillum dolore eu
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+        <CardActions>
+          <div style={{ width: '100%' }}>
+            <Button size="small" color="primary">
+              Delete <DeleteIcon></DeleteIcon>
+            </Button>
+          </div>
+
+          <FavoriteBorderIcon ></FavoriteBorderIcon>
+        </CardActions>
+      </Card>
+))}
       <Card className="thread-card">
         <CardActionArea>
 
