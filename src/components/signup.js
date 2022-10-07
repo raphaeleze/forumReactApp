@@ -33,7 +33,8 @@ export default function Signup() {
     showPassword: false
   };
 
-  const [values, setValues] = useState(JSON.parse(JSON.stringify(initValues)));
+  // const [values, setValues] = useState(JSON.parse(JSON.stringify(initValues)));
+  const [values, setValues] = useState(initValues);
 
 
   function navBack() {
@@ -68,21 +69,15 @@ export default function Signup() {
 
       try {
         fetch(`${URL}/users/add`, requestOptions)
-          // .then(err => {
-          //   if (err.status == 400) {
-          //     callStatus = err.status
-          //   }
-          // })
           .then(response => {
             console.log(response)
-            if (response.status !== 200) {
+            if (response.status !== 200) { //For catching error
+              callStatus = response.status;
               throw response.json()
             } else {
               return response.json()
             }
-          })
-          // .then(response => response.json())
-          .then(data => {
+          }).then(data => {
             let msg = '';
 
             if (data.msg) {
@@ -180,19 +175,19 @@ export default function Signup() {
   }
 
   return (
-    <div>
+    <div className='mar-5 width50 disp-block '>
       <Box
+        className='mar-5'
         component="form"
-        sx={{
-          '& > :not(style)': { padding: "50px 20px", width: 300, margin: "20px auto" },
-        }} noValidate autoComplete="off" >
+        // sx={{
+        //   '& > :not(style)': { padding: "50px 20px", width: 300, margin: "20px auto" },
+        // }} 
+        noValidate autoComplete="off" >
 
         <div>
           <h4>Registration form</h4>
           <TextField label="Username" variant="outlined" fullWidth className='mar-5' value={values.userName} onChange={handleChange('userName')} error={values.userNameError} />
           <TextField label="Email Address" variant="outlined" fullWidth className='mar-5' value={values.email} onChange={handleChange('email')} error={values.emailError} />
-          {/* <TextField id="outlined-basic" label="Password" variant="outlined" fullWidth className='mar-5' value="{password}" type="password" />
-          <TextField id="outlined-basic" label="Confim Password" variant="outlined" fullWidth className='mar-5' value="{confirmPassword}" type="password" /> */}
           <FormControl variant="outlined" className='mar-5' fullWidth>
             <InputLabel htmlFor="password">Password</InputLabel>
             <OutlinedInput fullWidth

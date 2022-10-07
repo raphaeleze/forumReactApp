@@ -11,20 +11,14 @@ import NavButtonsLoginSignup from './Nav';
 export default function Login() {
 
   return (
-    <div className='mar-5'>
+    <div className='mar-5 width50 disp-block '>
       <h4>Login form</h4>
-      <Box component="form"
-        // sx={{
-        //   '& > :not(style)': { padding: "50px 20px", width: 300, margin: "20px auto" },
-        // }}
-        noValidate autoComplete="off" className='disp-block mar-5'>
-
+      <Box component="form" noValidate autoComplete="off" className='disp-block mar-5'>
         <div>
           <TextField label="Email Address" variant="outlined" fullWidth className='mar-5' />
           <TextField label="Password" variant="outlined" fullWidth className='mar-5' />
         </div>
         <NavButtonsLoginSignup></NavButtonsLoginSignup>
-
       </Box>
     </div>
   );
