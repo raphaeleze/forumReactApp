@@ -72,7 +72,7 @@ export default function Signup() {
         fetch(`${URL}/users/add`, requestOptions)
           .then(response => {
             console.log(response)
-            if (response.status !== 200) { //For catching error
+            if (response.status == 400) { //For catching error
               callStatus = response.status;
               throw response.json()
             } else {
