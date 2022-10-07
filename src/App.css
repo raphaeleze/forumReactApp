@@ -49,3 +49,7 @@
   width: 50%;
   max-width: 30em;
 }
+
+.bg-toolbar{
+  background-color: #282c34 ;
+}

@@ -12,8 +12,8 @@ export default function ButtonAppBar() {
     
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
-        <Toolbar>
-          <IconButton
+        <Toolbar className='bg-toolbar'>
+          {/* <IconButton
             size="large"
             edge="start"
             color="inherit"
@@ -21,9 +21,9 @@ export default function ButtonAppBar() {
             sx={{ mr: 2 }}
           >
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Solera Forum APP
+            Dark Forum
           </Typography>
         </Toolbar>
       </AppBar>
