@@ -9,7 +9,6 @@ import Createpost from './createpost';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import Avatar from '@mui/material/Avatar';
 
-
 export default function ActionAreaCard() {
 
 
