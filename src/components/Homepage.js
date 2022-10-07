@@ -7,6 +7,8 @@ import {  Button, CardActionArea, CardActions } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Createpost from './createpost';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import Avatar from '@mui/material/Avatar';
+
 
 export default function ActionAreaCard() {
 
@@ -15,15 +17,14 @@ export default function ActionAreaCard() {
 
   return (
     
-    <div className='momo' style={{ width:'100%'}}>
+    <div className='momo' style={{ width:'100%', height:'100%', position:'relative'}}>
 
     <Card sx={{ maxWidth: 900, padding: "50px 20px", width: 800, margin: "20px auto" }}>
       <CardActionArea>
-        <CardMedia
-          height="140"
-          image="/components/images/avater.png"
-        />
+
         <CardContent>
+        <Avatar alt="Rodrigo G" src="components/images/avater.png" />
+
           <Typography gutterBottom variant="h5" component="div">
             Title
           </Typography>
@@ -49,11 +50,10 @@ export default function ActionAreaCard() {
 
     <Card sx={{ maxWidth: 900, padding: "50px 20px", width: 800, margin: "20px auto" }}>
       <CardActionArea>
-        <CardMedia
-          height="140"
-          image="/components/images/avater.png"
-        />
+
         <CardContent>
+        <Avatar alt="Luis Z" src="/components/images/avater.png" />
+
           <Typography gutterBottom variant="h5" component="div">
             Title
           </Typography>
