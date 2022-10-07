@@ -10,13 +10,58 @@ import NavButtonsLoginSignup from './Nav';
 
 export default function Login() {
 
+  const initValues = {
+    email: '',
+    emailError: false,
+    password: '',
+    passwordError: false,
+    showPassword: false
+  };
+
+  // const [values, setValues] = useState(JSON.parse(JSON.stringify(initValues)));
+  const [values, setValues] = useState(initValues);
+
+  const handleChange = (prop) => (event) => {
+
+    switch (prop) {
+      case "email":
+        if (isEmail(event.target.value)) {
+          values.emailError = false;
+        } else {
+          values.emailError = true;
+        }
+        break;
+
+      case "password":
+        if (event.target.value) {
+          values.passwordError = false;
+        } else {
+          values.passwordError = true;
+        }
+        break;
+    }
+    
+    setValues({ ...values, [prop]: event.target.value });
+  };
+
+  function isEmail(val) {
+    let regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (!regEmail.test(val)) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   return (
     <div className='mar-5 width50 disp-block '>
       <h4>Login form</h4>
       <Box component="form" noValidate autoComplete="off" className='disp-block mar-5'>
         <div>
-          <TextField label="Email Address" variant="outlined" fullWidth className='mar-5' />
-          <TextField label="Password" variant="outlined" fullWidth className='mar-5' />
+          <TextField label="Email Address" type="email" variant="outlined" fullWidth
+            className='mar-5' value={values.email} onChange={handleChange('email')} error={values.emailError}/>
+          <TextField label="Password" type="password" variant="outlined" fullWidth
+            className='mar-5' value={values.password} onChange={handleChange('password')} error={values.passwordError}/>
         </div>
         <NavButtonsLoginSignup></NavButtonsLoginSignup>
       </Box>

@@ -16,6 +16,8 @@ function NavButtonsLoginSignup() {
     }
 
     function onLogin() {
+
+
         navigate(process.env.PUBLIC_URL + "/Homepage");
     }
 
