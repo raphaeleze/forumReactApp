@@ -68,12 +68,20 @@ export default function Signup() {
 
       try {
         fetch(`${URL}/users/add`, requestOptions)
-          /*.then(err => {
-            if (err.status == 400) {
-              callStatus = err.status
+          // .then(err => {
+          //   if (err.status == 400) {
+          //     callStatus = err.status
+          //   }
+          // })
+          .then(response => {
+            console.log(response)
+            if (response.status !== 200) {
+              throw response.json()
+            } else {
+              return response.json()
             }
-          })*/
-          .then(response => response.json())
+          })
+          // .then(response => response.json())
           .then(data => {
             let msg = '';
 
