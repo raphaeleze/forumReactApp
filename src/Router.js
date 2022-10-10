@@ -2,6 +2,7 @@ import Login from "./components/Login";
 import Homepage from "./components/Homepage"
 import Signup from "./components/signup";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ForumPosts from "./ForumPosts";
 
 function Router() {
   return (
@@ -10,6 +11,8 @@ function Router() {
         <Route index element={<Login />} />
         <Route path="/signup/" element={<Signup />} />
         <Route path="/homepage" element={<Homepage />} />
+        <Route path="/ForumPosts" element={<ForumPosts />} />
+
       </Routes>
     </BrowserRouter>
   );

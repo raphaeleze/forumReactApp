@@ -6,8 +6,17 @@ import { Button, CardActionArea, CardActions } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import Avatar from '@mui/material/Avatar';
+import { useNavigate } from 'react-router-dom';
 
 export default function ThreadCard(props) {
+
+
+    const navigate = useNavigate();
+    function Threadpostpage(){ 
+
+        navigate("/ForumPosts");
+
+    };
 
     return (
 
@@ -29,7 +38,10 @@ export default function ThreadCard(props) {
                         Delete
                         <DeleteIcon></DeleteIcon>
                     </Button>
+                    <Button size="small" onClick={Threadpostpage}>View Thread</Button>
+
                 </div>
+                
 
                 <FavoriteBorderIcon ></FavoriteBorderIcon>
             </CardActions>
