@@ -12,16 +12,16 @@ export default function ThreadCard(props) {
 
 
     const navigate = useNavigate();
-    function Threadpostpage() {
 
-        navigate("/ForumPosts");
-
+    function onThreadPostClick(e, threadId) {
+        navigate("/ForumPosts/"+threadId);
     };
 
     return (
 
         <Card className="thread-card">
-            <CardActionArea onClick={Threadpostpage}>
+        <CardActionArea onClick={e => onThreadPostClick(e, props.threadId)}>
+            {/* <CardActionArea > */}
                 <CardContent>
                     <Avatar alt="Rodrigo G" src="components/images/avater.png" />
                     <Typography gutterBottom variant="h5" component="div">
@@ -39,8 +39,6 @@ export default function ThreadCard(props) {
                         <DeleteIcon></DeleteIcon>
                     </Button>
                 </div>
-
-
                 <FavoriteBorderIcon ></FavoriteBorderIcon>
             </CardActions>
         </Card>

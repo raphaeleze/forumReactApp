@@ -12,7 +12,6 @@ function Router() {
         <Route path="/signup/" element={<Signup />} />
         <Route path="/homepage" element={<Homepage />} />
         <Route path="/ForumPosts" element={<ForumPosts />} />
-
       </Routes>
     </BrowserRouter>
   );

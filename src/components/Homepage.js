@@ -34,7 +34,7 @@ export default function ActionAreaCard() {
       {
         threadList.map((item, index) => {
           return (
-            <ThreadCard title={item.title} body={item.creationDate} id={item.id}></ThreadCard>
+            <ThreadCard title={item.title} body={item.creationDate} threadId={item.id} key={item.id}></ThreadCard>
           )
         })
       }
