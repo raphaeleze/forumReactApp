@@ -11,6 +11,8 @@ import { Button } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function ForumPosts() {
+
+
     return (
         <><h2>Thread title : by </h2>
             <List sx={{ width: '80%', margin: 0, bgcolor: 'background.paper' }}>
