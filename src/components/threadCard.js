@@ -12,7 +12,7 @@ export default function ThreadCard(props) {
 
 
     const navigate = useNavigate();
-    function Threadpostpage(){ 
+    function Threadpostpage() {
 
         navigate("/ForumPosts");
 
@@ -41,7 +41,7 @@ export default function ThreadCard(props) {
                     <Button size="small" onClick={Threadpostpage}>View Thread</Button>
 
                 </div>
-                
+
 
                 <FavoriteBorderIcon ></FavoriteBorderIcon>
             </CardActions>
