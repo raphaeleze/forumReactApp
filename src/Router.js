@@ -2,7 +2,7 @@ import Login from "./components/Login";
 import Homepage from "./components/Homepage"
 import Signup from "./components/signup";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import ForumPosts from "./ForumPosts";
+import ForumPosts from "./components/ForumPosts";
 
 function Router() {
   return (

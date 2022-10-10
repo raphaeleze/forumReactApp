@@ -21,7 +21,7 @@ export default function ThreadCard(props) {
     return (
 
         <Card className="thread-card">
-            <CardActionArea>
+            <CardActionArea onClick={Threadpostpage}>
                 <CardContent>
                     <Avatar alt="Rodrigo G" src="components/images/avater.png" />
                     <Typography gutterBottom variant="h5" component="div">
@@ -38,8 +38,6 @@ export default function ThreadCard(props) {
                         Delete
                         <DeleteIcon></DeleteIcon>
                     </Button>
-                    <Button size="small" onClick={Threadpostpage}>View Thread</Button>
-
                 </div>
 
 
