@@ -5,13 +5,14 @@ import ThreadCard from './ThreadCard';
 
 export default function ActionAreaCard() {
 
-  const [threadList, setThreadList] = useState([{title: 'test', body:'hey'}])
+  const [threadList, setThreadList] = useState([{ title: 'test', body: 'hey' }])
   const URL = process.env.REACT_APP_API_URL
 
   const requestOptions = {
     method: 'GET',
-    headers: { 
-      'Accept': 'application/json'}
+    headers: {
+      'Accept': 'application/json'
+    }
   };
 
   useEffect(() => {
