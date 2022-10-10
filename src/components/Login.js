@@ -7,6 +7,16 @@ import { Button } from '@mui/material';
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
+
+import IconButton from '@mui/material/IconButton';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputAdornment from '@mui/material/InputAdornment';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
 
 import { notify } from '../utils.js';
 
@@ -46,33 +56,24 @@ export default function Login() {
 
       const URL = process.env.REACT_APP_API_URL
       let callStatus = 200;
+      let msg = '', status;
 
-      fetch(`${URL}/users/login`, requestOptions)
-        .then(response => {
-          console.log(response)
-          if (response.status == 400) { //For catching error
-            callStatus = response.status;
-            throw response.json()
-          } else {
-            return response.json()
-          }
-        }).then(data => {
-          let msg = '';
+      axios.post(`${URL}/users/login`, userData)
+        .then((data) => {
 
-          if (data.msg) {
-            msg = data.msg;
-          }
+          msg = data.data.msg ? data.data.msg : data.status === 200 ? "Login succesfull" : "Something went worng";
 
-          let status = callStatus !== 400 ? "success" : "error";
+          status = callStatus !== 400 ? toast.TYPE.SUCCESS : toast.TYPE.ERROR;
 
-          //process.env.REACT_APP_LOGIN_TOKEN = true;
           notify(msg, status);
           navigate(process.env.PUBLIC_URL + "/Homepage");
-
         })
-        .catch(err => {
-          notify("Something went wrong", "error");
-          console.log(err)
+        .catch((err) => {
+          msg = err.message ? err.message : "Something went wrong";
+          if (err.response.data.msg) {
+            msg = err.response.data.msg;
+          }
+          notify(msg, toast.TYPE.ERROR);
         });
     } else {
       notify("Check your inputs!", "error");
@@ -129,6 +130,17 @@ export default function Login() {
     return veredict;
   }
 
+  const handleClickShowPassword = () => {
+    setValues({
+      ...values,
+      showPassword: !values.showPassword,
+    });
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
   return (
     <div className='mar-5 width50 disp-block '>
       <h4>Login form</h4>
@@ -136,8 +148,29 @@ export default function Login() {
         <div>
           <TextField label="Email Address" type="email" variant="outlined" fullWidth
             className='mar-5' value={values.email} onChange={handleChange('email')} error={values.emailError} />
-          <TextField label="Password" type="password" variant="outlined" fullWidth
-            className='mar-5' value={values.password} onChange={handleChange('password')} error={values.passwordError} />
+          {/* <TextField label="Password" type="password" variant="outlined" fullWidth
+            className='mar-5' value={values.password} onChange={handleChange('password')} error={values.passwordError} /> */}
+          <FormControl variant="outlined" className='mar-5' fullWidth>
+            <InputLabel htmlFor="password">Password</InputLabel>
+            <OutlinedInput fullWidth
+              id="password"
+              label="Password"
+              type={values.showPassword ? 'text' : 'password'}
+              value={values.password}
+              error={values.passwordError}
+              onChange={handleChange('password')}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end" >
+                    {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              } />
+          </FormControl>
         </div>
         <div className='frontpageButtons mar-5'>
           <Button variant="contained" onClick={onLogin} className='mar-5'>Login</Button>
