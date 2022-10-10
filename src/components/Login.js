@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import { notify } from '../utils.js';
+
 export default function Login() {
 
   const initValues = {
@@ -35,9 +37,10 @@ export default function Login() {
 
       const requestOptions = {
         method: 'POST',
-        headers: { 
+        headers: {
           'Accept': 'application/json',
-          'Content-Type': 'application/json'},
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify(userData)
       };
 
@@ -62,6 +65,7 @@ export default function Login() {
 
           let status = callStatus !== 400 ? "success" : "error";
 
+          //process.env.REACT_APP_LOGIN_TOKEN = true;
           notify(msg, status);
           navigate(process.env.PUBLIC_URL + "/Homepage");
 
@@ -73,14 +77,6 @@ export default function Login() {
     } else {
       notify("Check your inputs!", "error");
     }
-  }
-
-  const notify = (text, type, duration = 5000) => {
-    const options = {
-      autoClose: duration,
-      type: type //toast.TYPE.INFO
-    }
-    toast(text, options);
   }
 
   const handleChange = (prop) => (event) => {

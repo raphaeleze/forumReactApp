@@ -16,6 +16,7 @@ import FormControl from '@mui/material/FormControl';
 
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { notify } from '../utils.js';
 
 
 export default function Signup() {
@@ -34,20 +35,11 @@ export default function Signup() {
     showPassword: false
   };
 
-  // const [values, setValues] = useState(JSON.parse(JSON.stringify(initValues)));
   const [values, setValues] = useState(initValues);
 
 
   function navBack() {
     navigate(process.env.PUBLIC_URL + "/")
-  }
-
-  const notify = (text, type, duration = 5000) => {
-    const options = {
-      autoClose: duration,
-      type: type //toast.TYPE.INFO
-    }
-    toast(text, options);
   }
 
   /**

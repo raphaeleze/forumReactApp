@@ -5,12 +5,15 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import IconButton from '@mui/material/IconButton';
-import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import { notify } from '../utils.js';
+import { toast } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
 
 export default function ButtonAppBar() {
 
+  //const navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -20,6 +23,16 @@ export default function ButtonAppBar() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const handleLogOut = () => {
+    if (process.env.REACT_APP_LOGIN_TOKEN) {
+      // process.env.REACT_APP_LOGIN_TOKEN = false;
+      notify("Logged out", toast.TYPE.INFO);
+      //navigate(process.env.PUBLIC_URL + "/");
+    } else {
+      notify("Can not log out", toast.TYPE.ERROR);
+    }
+  }
 
   return (
 
@@ -62,7 +75,7 @@ export default function ButtonAppBar() {
           >
             <MenuItem onClick={handleClose}>Profile</MenuItem>
             <MenuItem onClick={handleClose}>My account</MenuItem>
-            <MenuItem onClick={handleClose}>Logout</MenuItem>
+            <MenuItem onClick={handleLogOut}>Logout</MenuItem>
           </Menu>
         </Toolbar>
       </AppBar>
